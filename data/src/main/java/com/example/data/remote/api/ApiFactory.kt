@@ -1,4 +1,4 @@
-package com.example.data.remote
+package com.example.data.remote.api
 
 import android.content.Context
 import okhttp3.OkHttpClient
@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
-internal class ApiFactory(context: Context) {
+internal class ApiFactory(context: Context) : IApiFactory {
 
     private val mockInterceptor = MockInterceptor(context)
     private val mockClient = OkHttpClient.Builder()
@@ -19,10 +19,16 @@ internal class ApiFactory(context: Context) {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    val apiService = retrofit.create<ApiService>()
+    private val apiService = retrofit.create<ApiService>()
+
+    override fun getApiService(): ApiService = apiService
 
     private companion object {
         const val BASE_URL = "https://anything.com/"
     }
 
+}
+
+internal interface IApiFactory {
+    fun getApiService(): ApiService
 }
