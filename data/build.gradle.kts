@@ -33,6 +33,13 @@ android {
 }
 
 dependencies {
+    implementation(project(":domain"))
+
+    implementation(libs.koin.android)
+
+    implementation(libs.okhttp)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

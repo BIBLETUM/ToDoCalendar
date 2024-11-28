@@ -50,6 +50,11 @@ android {
 }
 
 dependencies {
+    implementation(project(":ui"))
+    implementation(project(":data"))
+    implementation(project(":domain"))
+
+    implementation(libs.koin.android)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
