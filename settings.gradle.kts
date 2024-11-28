@@ -21,3 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "ToDoCalendar"
 include(":app")
+include(":ui")
+include(":data")
+include(":domain")
