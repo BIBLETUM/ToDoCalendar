@@ -35,10 +35,12 @@ internal class MockInterceptor(private val context: Context) : Interceptor {
             .code(code)
             .request(request)
             .protocol(Protocol.HTTP_1_1)
+            .message("")
             .body(responseBody.toResponseBody("application/json".toMediaTypeOrNull()))
             .addHeader("content-type", "application/json")
             .build()
     }
+
 
     private fun loadMockResponse(resourceId: Int): String {
         val inputStream = context.resources.openRawResource(resourceId)
