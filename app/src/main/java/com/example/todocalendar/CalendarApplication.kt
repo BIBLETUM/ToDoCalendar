@@ -3,6 +3,7 @@ package com.example.todocalendar
 import android.app.Application
 import com.example.data.di.dataModule
 import com.example.domain.di.domainModule
+import com.example.ui.di.uiModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -18,7 +19,7 @@ class CalendarApplication : Application() {
             androidContext(this@CalendarApplication)
             modules(
                 domainModule,
-//                uiModule,
+                uiModule,
                 dataModule,
             )
         }
