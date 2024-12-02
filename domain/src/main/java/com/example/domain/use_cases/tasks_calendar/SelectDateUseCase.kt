@@ -1,4 +1,4 @@
-package com.example.domain.use_cases
+package com.example.domain.use_cases.tasks_calendar
 
 internal class SelectDateUseCase(
     private val selectedDateInnerFlow: SelectedDateInnerFlow

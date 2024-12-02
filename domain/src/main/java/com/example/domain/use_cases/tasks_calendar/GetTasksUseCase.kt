@@ -1,4 +1,4 @@
-package com.example.domain.use_cases
+package com.example.domain.use_cases.tasks_calendar
 
 import com.example.domain.models.Task
 import com.example.domain.repository.TaskRepository
