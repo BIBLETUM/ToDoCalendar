@@ -1,11 +1,19 @@
 package com.example.domain.di
 
-import com.example.domain.use_cases.GetTasksUseCase
-import com.example.domain.use_cases.IGetTasksUseCase
+import com.example.domain.use_cases.task_detail.TaskIdInnerFlow
+import com.example.domain.use_cases.tasks_calendar.GetTasksUseCase
+import com.example.domain.use_cases.tasks_calendar.IGetTasksUseCase
+import com.example.domain.use_cases.tasks_calendar.ISelectDateUseCase
+import com.example.domain.use_cases.tasks_calendar.SelectDateUseCase
+import com.example.domain.use_cases.tasks_calendar.SelectedDateInnerFlow
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val useCasesModule = module {
     singleOf(::GetTasksUseCase) bind IGetTasksUseCase::class
+    singleOf(::SelectDateUseCase) bind ISelectDateUseCase::class
+    single<SelectedDateInnerFlow> { SelectedDateInnerFlow() }
+
+    single<TaskIdInnerFlow> { TaskIdInnerFlow() }
 }
