@@ -2,10 +2,12 @@ package com.example.domain.di
 
 import com.example.domain.use_cases.GetTasksUseCase
 import com.example.domain.use_cases.IGetTasksUseCase
+import com.example.domain.use_cases.SelectedDateInnerFlow
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val useCasesModule = module {
     singleOf(::GetTasksUseCase) bind IGetTasksUseCase::class
+    single<SelectedDateInnerFlow> { SelectedDateInnerFlow() }
 }

@@ -10,8 +10,8 @@ internal class TaskMapper : ITaskMapper {
             id = taskDto.id,
             name = taskDto.name,
             description = taskDto.description,
-            dateStart = taskDto.dateStart,
-            dateFinish = taskDto.dateFinish
+            dateStart = taskDto.dateStart.toLong(),
+            dateFinish = taskDto.dateFinish.toLong(),
         )
     }
 
@@ -20,8 +20,8 @@ internal class TaskMapper : ITaskMapper {
             id = task.id,
             name = task.name,
             description = task.description,
-            dateStart = task.dateStart,
-            dateFinish = task.dateFinish
+            dateStart = task.dateStart.toString(),
+            dateFinish = task.dateFinish.toString(),
         )
     }
 }
