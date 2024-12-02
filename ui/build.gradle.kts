@@ -41,6 +41,8 @@ android {
 dependencies {
     implementation(project(":domain"))
 
+    implementation (libs.lottie.compose)
+
     implementation(libs.koin.android)
 
     implementation(libs.kotlinx.coroutines.core)
