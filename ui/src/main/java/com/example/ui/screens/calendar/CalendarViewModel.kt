@@ -50,16 +50,22 @@ internal class CalendarViewModel(
     }
 
     private fun updateStateWithTasks(tasks: List<TaskUi>) {
+        val tasksMap: Map<String, TaskUi> = tasks.associateBy { task ->
+            val startHour = task.dateStart.hours
+            val endHour = task.dateFinish.hours
+            "%02d:00-%02d:00".format(startHour, endHour)
+        }
+
         _screenState.update { state ->
             when (state) {
                 is CalendarScreenState.DateSelected.Loading -> {
-                    CalendarScreenState.DateSelected.Content(tasks, state.selectedDate)
+                    CalendarScreenState.DateSelected.Content(tasksMap, state.selectedDate)
                 }
-
                 else -> state
             }
         }
     }
+
 
     private fun updateStateWithError(throwable: Throwable) {
         _screenState.update {
