@@ -7,5 +7,6 @@ val dataModule = module {
         mapperModule,
         repositoryModule,
         remoteDataSourceModule,
+        dbModule,
     )
 }
