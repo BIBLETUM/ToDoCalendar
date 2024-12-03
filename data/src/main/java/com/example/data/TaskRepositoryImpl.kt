@@ -35,7 +35,16 @@ internal class TaskRepositoryImpl(
     }
 
     override suspend fun addTask(task: Task) {
-        val taskDto = taskMapper.mapTaskDomainToDto(task)
-        apiService.addTask(taskDto)
+        val taskEntity = taskMapper.mapTaskDomainToEntity(task)
+        taskDao.insertTask(taskEntity)
+    }
+
+    override fun getTaskDetail(taskId: Int): Flow<Task> {
+        return taskDao.getTaskById(taskId).map { task ->
+            task?.let {
+                taskMapper.mapTaskEntityToDomain(task)
+            } ?: throw RuntimeException("Task with id $taskId was not found")
+
+        }
     }
 }

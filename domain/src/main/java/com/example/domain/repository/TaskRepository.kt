@@ -9,4 +9,6 @@ interface TaskRepository {
 
     suspend fun addTask(task: Task)
 
+    fun getTaskDetail(taskId: Int): Flow<Task>
+
 }
