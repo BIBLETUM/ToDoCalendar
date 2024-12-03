@@ -24,7 +24,7 @@ internal class GetTasksUseCase(
 
             allTasksFlow.map { tasks ->
                 tasks.filter { task ->
-                    (task.dateStart < endOfDay && task.dateFinish > startOfDay)
+                    task.dateStart < endOfDay && task.dateFinish > startOfDay
                 }
             }
         }

@@ -1,11 +1,9 @@
 package com.example.ui.components
 
-import android.util.Log
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerState
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -22,7 +20,7 @@ internal fun Calendar(
 ) {
     LaunchedEffect(datePickerState.selectedDateMillis) {
         datePickerState.selectedDateMillis?.let { selectedDate ->
-            Log.d("Calendar", "Selected date: $selectedDate")
+            val timestamp = selectedDate / MILLIS_IN_SECONDS
             onDateSelected(selectedDate)
         }
     }
@@ -39,3 +37,5 @@ internal fun Calendar(
         )
     )
 }
+
+private const val MILLIS_IN_SECONDS = 1000

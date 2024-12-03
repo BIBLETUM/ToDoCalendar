@@ -37,7 +37,7 @@ internal fun TimeTable(
     userScrollEnabled: Boolean = false,
     onTaskClick: (TaskUi) -> Unit = {},
 ) {
-    val cellHeight = 60.dp
+    val cellHeight = 80.dp
     val verticalSpacing = 8.dp
     val contentPadding = PaddingValues(4.dp)
 
@@ -80,6 +80,7 @@ private fun TaskCell(
         modifier = modifier
             .heightIn(minHeight)
             .clip(RoundedCornerShape(8.dp))
+            .clickable(enabled = enabled, onClick = onClick)
             .drawBehind {
                 when (enabled) {
                     true -> {
@@ -91,8 +92,7 @@ private fun TaskCell(
                     }
                 }
             }
-            .padding(8.dp)
-            .clickable(enabled = enabled, onClick = onClick), contentAlignment = Alignment.Center
+            .padding(8.dp), contentAlignment = Alignment.Center
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(6.dp),

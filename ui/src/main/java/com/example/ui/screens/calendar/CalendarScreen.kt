@@ -44,17 +44,22 @@ private fun CalendarScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(vertical = 16.dp)
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Calendar(datePickerState = datePickerState, onDateSelected = viewModel::selectDate)
+        Calendar(
+            modifier = Modifier.padding(top = 16.dp),
+            datePickerState = datePickerState,
+            onDateSelected = viewModel::selectDate
+        )
         when (val state = screenState.value) {
             is CalendarScreenState.Initial -> {}
 
             is CalendarScreenState.DateSelected.Content -> {
                 TimeTable(
-                    modifier = Modifier.padding(horizontal = 16.dp),
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .padding(bottom = 20.dp),
                     tasks = state.tasks,
                     onTaskClick = {})
             }

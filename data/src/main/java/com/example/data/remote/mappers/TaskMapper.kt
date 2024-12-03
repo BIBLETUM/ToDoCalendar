@@ -10,8 +10,8 @@ internal class TaskMapper : ITaskMapper {
             id = taskDto.id,
             name = taskDto.name,
             description = taskDto.description,
-            dateStart = taskDto.dateStart.toLong(),
-            dateFinish = taskDto.dateFinish.toLong(),
+            dateStart = taskDto.dateStart.toLong() * MILLIS_IN_SECOND,
+            dateFinish = taskDto.dateFinish.toLong() * MILLIS_IN_SECOND,
         )
     }
 
@@ -20,10 +20,15 @@ internal class TaskMapper : ITaskMapper {
             id = task.id,
             name = task.name,
             description = task.description,
-            dateStart = task.dateStart.toString(),
-            dateFinish = task.dateFinish.toString(),
+            dateStart = (task.dateStart / MILLIS_IN_SECOND).toString(),
+            dateFinish = (task.dateFinish / MILLIS_IN_SECOND).toString(),
         )
     }
+
+    companion object {
+        private const val MILLIS_IN_SECOND = 1000
+    }
+
 }
 
 internal interface ITaskMapper {
