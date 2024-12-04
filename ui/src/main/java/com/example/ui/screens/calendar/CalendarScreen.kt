@@ -23,7 +23,8 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 internal fun CalendarScreenRoot(
-    viewModel: CalendarViewModel = koinViewModel()
+    viewModel: CalendarViewModel = koinViewModel(),
+    navigateToTaskDetail: (Int) -> Unit,
 ) {
 
     val screenState = viewModel.getScreenState().collectAsStateWithLifecycle()
@@ -31,6 +32,7 @@ internal fun CalendarScreenRoot(
     CalendarScreen(
         viewModel = viewModel,
         screenState = screenState,
+        navigateToTaskDetail = navigateToTaskDetail,
     )
 }
 
@@ -38,6 +40,7 @@ internal fun CalendarScreenRoot(
 private fun CalendarScreen(
     viewModel: CalendarViewModel,
     screenState: State<CalendarScreenState>,
+    navigateToTaskDetail: (Int) -> Unit,
 ) {
     val datePickerState = rememberDatePickerState()
 
@@ -61,7 +64,9 @@ private fun CalendarScreen(
                         .padding(horizontal = 16.dp)
                         .padding(bottom = 20.dp),
                     tasks = state.tasks,
-                    onTaskClick = {})
+                    onTaskClick = { task ->
+                        navigateToTaskDetail(task.id)
+                    })
             }
 
             is CalendarScreenState.DateSelected.Loading -> {

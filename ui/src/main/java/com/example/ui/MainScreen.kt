@@ -7,7 +7,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.rememberNavController
 import com.example.ui.navigation.AppNavGraph
+import com.example.ui.navigation.Screen
 import com.example.ui.screens.calendar.CalendarScreenRoot
+import com.example.ui.screens.task_detail.TaskDetailScreenRoot
 
 @Composable
 fun MainScreen() {
@@ -17,6 +19,11 @@ fun MainScreen() {
             .fillMaxSize()
             .background(Color.White),
         navHostController = navHostController,
-        calendarScreenRoot = { CalendarScreenRoot() }
+        calendarScreen = {
+            CalendarScreenRoot(navigateToTaskDetail = { taskId ->
+                navHostController.navigate(Screen.TaskDetail.getRouteWithArgs(taskId))
+            })
+        },
+        taskDetailScreen = { TaskDetailScreenRoot() }
     )
 }

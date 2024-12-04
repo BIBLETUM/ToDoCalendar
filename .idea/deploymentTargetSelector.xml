@@ -16,7 +16,7 @@
       <SelectionState runConfigName="Calendar">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="ScheduleTablePreview">
+      <SelectionState runConfigName="TaskDetailScreen">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

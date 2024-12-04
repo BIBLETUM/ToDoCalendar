@@ -10,16 +10,19 @@ import androidx.navigation.compose.composable
 internal fun AppNavGraph(
     modifier: Modifier = Modifier,
     navHostController: NavHostController,
-    calendarScreenRoot: @Composable () -> Unit,
-
-    ) {
+    calendarScreen: @Composable () -> Unit,
+    taskDetailScreen: @Composable () -> Unit,
+) {
     NavHost(
         modifier = modifier,
         navController = navHostController,
         startDestination = Screen.Calendar.route
     ) {
         composable(Screen.Calendar.route) {
-            calendarScreenRoot()
+            calendarScreen()
+        }
+        composable(Screen.TaskDetail.route) {
+            taskDetailScreen()
         }
     }
 }

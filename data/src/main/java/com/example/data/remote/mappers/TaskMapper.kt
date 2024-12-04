@@ -46,6 +46,16 @@ internal class TaskMapper : ITaskMapper {
         )
     }
 
+    override fun mapTaskDomainToEntity(task: Task): TaskEntity {
+        return TaskEntity(
+            id = task.id,
+            name = task.name,
+            description = task.description,
+            dateStart = task.dateStart / MILLIS_IN_SECOND,
+            dateFinish = task.dateFinish / MILLIS_IN_SECOND,
+        )
+    }
+
     companion object {
         private const val MILLIS_IN_SECOND = 1000
     }
@@ -61,5 +71,7 @@ internal interface ITaskMapper {
     fun mapTaskDtoToEntity(taskDto: TaskDto): TaskEntity
 
     fun mapTaskEntityToDomain(taskEntity: TaskEntity): Task
+
+    fun mapTaskDomainToEntity(task: Task): TaskEntity
 
 }
