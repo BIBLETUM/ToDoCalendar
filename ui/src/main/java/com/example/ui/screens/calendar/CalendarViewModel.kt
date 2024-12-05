@@ -101,7 +101,6 @@ internal class CalendarViewModel(
         dismissDialog()
     }
 
-
     private fun observeTasks() {
         viewModelScope.launch(exceptionHandler) {
             getTasksUseCase()
@@ -131,6 +130,10 @@ internal class CalendarViewModel(
                     CalendarScreenState.DateSelected.Content(tasksMap, state.selectedDate)
                 }
 
+                is CalendarScreenState.DateSelected.Content -> {
+                    CalendarScreenState.DateSelected.Content(tasksMap, state.selectedDate)
+                }
+
                 else -> state
             }
         }
@@ -141,7 +144,8 @@ internal class CalendarViewModel(
         if (timeParts.size != 2) return null
 
         return try {
-            val currentDate = Date()
+            val currentContent = getContentScreenState() ?: return null
+            val currentDate = Date(currentContent.selectedDate)
             val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
             val dateOnlyFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val dateOnly = dateOnlyFormat.format(currentDate)
@@ -169,6 +173,10 @@ internal class CalendarViewModel(
 
     private fun getDialogState(): AddTaskDialogState? {
         return (_screenState.value as? CalendarScreenState.DateSelected.Content)?.addTaskState
+    }
+
+    private fun getContentScreenState(): CalendarScreenState.DateSelected.Content? {
+        return (_screenState.value as? CalendarScreenState.DateSelected.Content)
     }
 
     private fun updateStateWithError(throwable: Throwable) {
