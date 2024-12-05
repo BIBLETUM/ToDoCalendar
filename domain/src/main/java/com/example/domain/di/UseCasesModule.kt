@@ -1,5 +1,8 @@
 package com.example.domain.di
 
+import com.example.domain.use_cases.add_task.INewTaskInteractor
+import com.example.domain.use_cases.add_task.NewTaskInnerFlow
+import com.example.domain.use_cases.add_task.NewTaskInteractor
 import com.example.domain.use_cases.task_detail.GetTaskDetailFlowUseCase
 import com.example.domain.use_cases.task_detail.IGetTaskDetailFlowUseCase
 import com.example.domain.use_cases.task_detail.ISelectTaskUseCase
@@ -22,4 +25,7 @@ val useCasesModule = module {
     single<TaskIdInnerFlow> { TaskIdInnerFlow() }
     singleOf(::GetTaskDetailFlowUseCase) bind IGetTaskDetailFlowUseCase::class
     singleOf(::SelectTaskUseCase) bind ISelectTaskUseCase::class
+
+    single<NewTaskInnerFlow> { NewTaskInnerFlow() }
+    singleOf(::NewTaskInteractor) bind INewTaskInteractor::class
 }
