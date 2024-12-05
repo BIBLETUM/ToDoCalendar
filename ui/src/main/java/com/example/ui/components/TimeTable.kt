@@ -35,6 +35,7 @@ internal fun TimeTable(
     tasks: Map<String, TaskUi>,
     columns: Int = 3,
     userScrollEnabled: Boolean = false,
+    onAddTask: (String) -> Unit = {},
     onTaskClick: (TaskUi) -> Unit = {},
 ) {
     val cellHeight = 80.dp
@@ -58,7 +59,7 @@ internal fun TimeTable(
         items(timeIntervals) { timeSlot ->
             val task = tasks[timeSlot]
             TaskCell(name = task?.name, minHeight = cellHeight, timeInterval = timeSlot) {
-                task?.let(onTaskClick)
+                task?.let(onTaskClick) ?: onAddTask(timeSlot)
             }
         }
     }
@@ -80,7 +81,7 @@ private fun TaskCell(
         modifier = modifier
             .heightIn(minHeight)
             .clip(RoundedCornerShape(8.dp))
-            .clickable(enabled = enabled, onClick = onClick)
+            .clickable(onClick = onClick)
             .drawBehind {
                 when (enabled) {
                     true -> {

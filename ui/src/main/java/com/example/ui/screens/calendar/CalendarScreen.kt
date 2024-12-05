@@ -19,6 +19,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.ui.components.Calendar
 import com.example.ui.components.LoaderScreen
 import com.example.ui.components.TimeTable
+import com.example.ui.screens.calendar.add_task.AddTaskDialog
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -66,7 +67,21 @@ private fun CalendarScreen(
                     tasks = state.tasks,
                     onTaskClick = { task ->
                         navigateToTaskDetail(task.id)
-                    })
+                    },
+                    onAddTask = viewModel::setTaskTimeInterval
+                )
+
+                state.addTaskState?.let {
+                    AddTaskDialog(
+                        name = it.name,
+                        onNameChange = viewModel::setTaskName,
+                        onDescriptionChange = viewModel::setTaskDescription,
+                        isButtonEnabled = it.getIsButtonEnabled(),
+                        description = it.description,
+                        onSaveTask = viewModel::saveNewTask,
+                        onDismissRequest = viewModel::dismissDialog,
+                    )
+                }
             }
 
             is CalendarScreenState.DateSelected.Loading -> {

@@ -4,4 +4,7 @@
     <string name="date">Дата:</string>
     <string name="date_finish">Дата конца:</string>
     <string name="date_start">Дата начала:</string>
+    <string name="save">Сохранить</string>
+    <string name="task_description">Описание задачи</string>
+    <string name="task_name">Название задачи</string>
 </resources>
