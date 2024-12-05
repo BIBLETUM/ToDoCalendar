@@ -1,12 +1,17 @@
 package com.example.ui.screens.task_detail
 
 import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,22 +30,26 @@ import java.util.Locale
 
 @Composable
 internal fun TaskDetailScreenRoot(
-    viewModel: TaskDetailViewModel = koinViewModel()
+    viewModel: TaskDetailViewModel = koinViewModel(),
+    navigateBack: () -> Unit,
 ) {
-
     val screenState = viewModel.getScreenState().collectAsStateWithLifecycle()
 
-    TaskDetail(screenState = screenState)
-
+    TaskDetail(screenState = screenState, navigateBack = navigateBack)
 }
 
 @Composable
 private fun TaskDetail(
-    screenState: State<TaskDetailScreenState>
+    screenState: State<TaskDetailScreenState>,
+    navigateBack: () -> Unit,
 ) {
 
     when (val currentState = screenState.value) {
-        is TaskDetailScreenState.Content -> TaskDetailScreenContent(task = currentState.taskUi)
+        is TaskDetailScreenState.Content -> TaskDetailScreenContent(
+            task = currentState.taskUi,
+            navigateBack = navigateBack
+        )
+
         is TaskDetailScreenState.Error -> Log.d("TaskDetailScreen", currentState.errorMessage)
         TaskDetailScreenState.Loading -> LoaderScreen()
     }
@@ -50,6 +59,7 @@ private fun TaskDetail(
 @Composable
 private fun TaskDetailScreenContent(
     task: TaskUi,
+    navigateBack: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -57,12 +67,26 @@ private fun TaskDetailScreenContent(
             .padding(16.dp)
             .verticalScroll(rememberScrollState())
     ) {
-
-        TaskHeader(modifier = Modifier.padding(top = 20.dp), title = task.name)
+        TopBar(modifier = Modifier.padding(top = 20.dp), onBackPressed = navigateBack)
+        TaskHeader(modifier = Modifier.padding(top = 8.dp), title = task.name)
         TaskDescription(description = task.description)
         TaskDate(label = stringResource(R.string.date_start), date = task.dateStart)
         TaskDate(label = stringResource(R.string.date_finish), date = task.dateFinish)
     }
+}
+
+@Composable
+private fun TopBar(
+    modifier: Modifier = Modifier,
+    onBackPressed: () -> Unit
+) {
+    Icon(
+        modifier = modifier
+            .size(24.dp)
+            .clickable { onBackPressed() },
+        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+        contentDescription = null,
+    )
 }
 
 @Composable

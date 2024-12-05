@@ -24,6 +24,6 @@ fun MainScreen() {
                 navHostController.navigate(Screen.TaskDetail.getRouteWithArgs(taskId))
             })
         },
-        taskDetailScreen = { TaskDetailScreenRoot() }
+        taskDetailScreen = { TaskDetailScreenRoot(navigateBack = { navHostController.popBackStack() }) }
     )
 }

@@ -14,10 +14,11 @@ data class MeetsColorScheme(
     val backgroundDisabled: Color,
     val buttonTextDisabled: Color,
     val placeholder: Color,
+    val error: Color,
     val gradientViolet: List<Pair<Float, Color>>,
     val gradientSmoky: List<Pair<Float, Color>>,
+    val green: Color,
 )
-
 
 val LightColorScheme = MeetsColorScheme(
     primaryStroke = Color(0xFF9A41FE),
@@ -28,6 +29,8 @@ val LightColorScheme = MeetsColorScheme(
     backgroundDisabled = Color(0xFFF6F6FA),
     buttonTextDisabled = Color(0xFF9797AF),
     placeholder = Color(0xFFADB5BD),
+    error = Color(0xFFF0114C),
+    green = Color(0xFF00BF59),
     gradientViolet = listOf(
         0.0f to Color(0xFFED3CCA),
         0.15f to Color(0xFFDF34D2),
