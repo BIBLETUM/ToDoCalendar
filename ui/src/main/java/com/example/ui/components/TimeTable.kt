@@ -7,10 +7,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -113,6 +117,18 @@ private fun TaskCell(
                 color = textColor,
                 maxLines = 1,
             )
+            when (name.isNullOrEmpty()) {
+                true -> {
+                    Icon(
+                        imageVector = Icons.Filled.Add,
+                        contentDescription = "Add task",
+                        modifier = Modifier.size(24.dp),
+                        tint = textColor
+                    )
+                }
+
+                else -> {}
+            }
         }
     }
 }
