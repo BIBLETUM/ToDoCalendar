@@ -16,9 +16,11 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 import org.koin.dsl.bind
 import org.koin.dsl.module
 import org.koin.java.KoinJavaComponent.inject
@@ -51,6 +53,11 @@ class ExampleUnitTest {
                 }
             )
         }
+    }
+
+    @After
+    fun tearDown() {
+        stopKoin()
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -95,5 +102,6 @@ class ExampleUnitTest {
         val newList = getTasksUseCase().first()
         assertTrue(newList.contains(newTask))
     }
+
 
 }
